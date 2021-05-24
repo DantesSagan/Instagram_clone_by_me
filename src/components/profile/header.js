@@ -21,12 +21,12 @@ export default function Header({
   const [isFollowingProfile, setIsFollowingProfile] = useState(false);
   const activeBtnFollow = user.username && user.username !== profileUsername;
 
-  const handleToggleFollow = () => {
+  const handleToggleFollow = async () => {
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
     setFollowerCount({
       followerCount: isFollowingProfile ? followerCount - 1 : followers + 1
     });
-    await toggleFollow(); 
+    await toggleFollow(isFollowingProfile, user.docId, profileDocId, profileUserId, user.userId);
   };
 
   useEffect(() => {

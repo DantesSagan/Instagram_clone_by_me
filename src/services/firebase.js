@@ -1,4 +1,3 @@
-import { array } from 'prop-types';
 import { firebase, FieldValue } from '../lib/firebase';
 
 export async function doesUsernameExist(username) {
@@ -101,18 +100,18 @@ export async function getPhotos(userId, following) {
   return photosWithUserDetails;
 }
 
-export async function getUserPhotosByUsername(username) {
-  const [user] = await getUserByUsername(username);
+export async function getUserPhotosByUserId(userId) {
   const result = await firebase
     .firestore()
     .collection('photos')
-    .doc('userId', '==', user.uid)
+    .where('userId', '==', userId)
     .get();
 
-  return result.doc.map((item) => ({
-    ...item.data(),
-    docId: item.id
+  const photos = result.docs.map((photo) => ({
+    ...photo.data(),
+    docId: photo.id
   }));
+  return photos;
 }
 
 export async function isUserFollowingProfile(loggedInUserUsername, profileUserId) {
@@ -138,6 +137,13 @@ export async function toggleFollow(
   profileUserId,
   followingUserId
 ) {
-  await updateLoggedInUserFollowing(activeUserDocId, profileDocId, isFollowingProfile);
-  await updateFollowedUserFollowers
+  // 1st param alex's doc id
+  // 2nd param: raphael 's doc id
+  // 3rd param: is user following this profile? e.g does karl follow raphael? (true/false)
+  await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+
+  // 1st param: alex's doc id
+  // // 2nd param: the user that alex requests to follow
+  /// 3rd param: is user following this profile? e.g does karl follow raphael? (true/false)
+  await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
