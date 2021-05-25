@@ -23,10 +23,10 @@ export default function App() {
         <Loader />
         <Suspense fallback={<p>Loading...</p>}>
           <Switch>
-            <IsUserLoggedIn user={user} loggedInPah={ROUTES.DASHBOARD} path={ROUTES.LOGIN}>
+            <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.LOGIN}>
               <Login />
             </IsUserLoggedIn>
-            <IsUserLoggedIn user={user} loggedInPah={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
+            <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
               <SingUp />
             </IsUserLoggedIn>
             <Route path={ROUTES.PROFILE} component={Profile} />
