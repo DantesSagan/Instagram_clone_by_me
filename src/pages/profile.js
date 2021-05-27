@@ -4,6 +4,7 @@ import { getUserByUsername } from '../services/firebase';
 import * as ROUTES from '../constants/routes';
 import Header from '../components/header';
 import UserProfile from '../components/profile';
+import Loader from './loader';
 
 export default function Profile() {
   const { username } = useParams();
@@ -26,6 +27,7 @@ export default function Profile() {
   return user?.username ? (
     <div className="bg-gray-background">
       <Header />
+      <Loader />
       <div className="max-auto max-w-screen-lg">
         <UserProfile user={user} />
       </div>

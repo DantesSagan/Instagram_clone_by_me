@@ -13,7 +13,7 @@ export default function Header() {
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full ">
-          <div className="text-gray-700 text-center flex item-center align-items cursor-pointer">
+          <div className="text-gray-700 text-center flex items-center align-items cursor-pointer">
             <h1 className="felx justify-center w-full">
               <Link to={ROUTES.DASHBOARD} aria-label="Instagram logo">
                 <img src="/images/logo.png" alt="Instagram" className="mt-2 w-6/12" />
