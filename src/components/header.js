@@ -3,10 +3,13 @@ import { Link, useHistory } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import UserContext from '../context/user';
 import * as ROUTES from '../constants/routes';
+import useUser from '../hooks/use-user';
+import { DEFAULT_IMAGE_PATH } from '../constants/defaultPaths';
 
 export default function Header() {
   const { firebase } = useContext(FirebaseContext);
-  const { user } = useContext(UserContext);
+  const { user: loggedInUser } = useContext(UserContext);
+  const { user } = useUser(loggedInUser?.uid);
   const history = useHistory();
 
   return (
@@ -21,7 +24,7 @@ export default function Header() {
             </h1>
           </div>
           <div className="text-gray-700 text-center flex items-center align-items">
-            {user ? (
+            {loggedInUser ? (
               <>
                 <Link to={ROUTES.DASHBOARD} aria-label="Dashboard">
                   <svg
@@ -50,6 +53,7 @@ export default function Header() {
                   onKeyDown={(event) => {
                     if (event.key === 'Enter') {
                       firebase.auth().signOut();
+                      history.push(ROUTES.LOGIN);
                     }
                   }}
                 >
@@ -68,16 +72,20 @@ export default function Header() {
                     />
                   </svg>
                 </button>
-
-                <div className="flex items-center cursor-pointer">
-                  <Link to={`/p/'${user?.username}`}>
-                    <img
-                      className="rounded-full h-8 w-8 flex"
-                      src={`/images/avatars/${user?.username}.jpg`}
-                      alt={`${user?.displayName} profile`}
-                    />
-                  </Link>
-                </div>
+                {user && (
+                  <div className="flex items-center cursor-pointer">
+                    <Link to={`/p/'${user?.username}`}>
+                      <img
+                        className="rounded-full h-8 w-8 flex"
+                        src={`/images/avatars/${user?.username}.jpg`}
+                        alt={`${user?.username} profile`}
+                        onError={(e) => {
+                          e.target.src = DEFAULT_IMAGE_PATH;
+                        }}
+                      />
+                    </Link>
+                  </div>
+                )}
               </>
             ) : (
               <>

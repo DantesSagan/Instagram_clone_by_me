@@ -1,19 +1,19 @@
 /* eslint-disable no-nested-ternary */
 import Skeleton from 'react-loading-skeleton';
+import { useContext } from 'react';
+import LoggedInUserContext from '../context/logged-in-user';
 import usePhotos from '../hooks/use-photos';
 import Post from './post';
 
 export default function TimeLine() {
-  const { photos } = usePhotos();
+  const { user } = useContext(LoggedInUserContext);
+  const { photos } = usePhotos(user);
 
-  console.log('photos', photos);
   return (
     <div className="container col-span-2">
       {!photos ? (
         <>
-          {[...new Array(4)].map((_, index) => (
-            <Skeleton key={index} count={4} width={640} height={640} className="mb-10" />
-          ))}
+          <Skeleton count={4} width={640} height={640} className="mb-10" />)
         </>
       ) : photos?.length > 0 ? (
         photos.map((content) => <Post key={content.docId} content={content} />)

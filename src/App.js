@@ -7,10 +7,9 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import Loader from './pages/loader';
 
 import ProtectedRoute from './helpers/protected-route';
-import IsUserLoggedIn from './helpers/is-user-logged-in';
 
 const Login = lazy(() => import('./pages/login'));
-const SingUp = lazy(() => import('./pages/sign-up'));
+const SignUp = lazy(() => import('./pages/sign-up'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'));
 const NotFound = lazy(() => import('./pages/not-found'));
@@ -20,15 +19,10 @@ export default function App() {
   return (
     <UserContext.Provider value={{ user }}>
       <Router>
-        <Loader />
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<Loader />}>
           <Switch>
-            <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.LOGIN}>
-              <Login />
-            </IsUserLoggedIn>
-            <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD} path={ROUTES.SIGN_UP}>
-              <SingUp />
-            </IsUserLoggedIn>
+            <Route path={ROUTES.LOGIN} component={Login} />
+            <Route path={ROUTES.SIGN_UP} component={SignUp} />
             <Route path={ROUTES.PROFILE} component={Profile} />
             <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
               <Dashboard />

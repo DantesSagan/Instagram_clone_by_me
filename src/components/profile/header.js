@@ -5,6 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
 import UserContext from '../../context/user';
+import { DEFAULT_IMAGE_PATH } from '../../constants/defaultPaths';
 
 export default function Header({
   photosCount,
@@ -14,14 +15,14 @@ export default function Header({
     docId: profileDocId,
     userId: profileUserId,
     fullName,
-    followers = [],
-    following = [],
+    followers,
+    following,
     username: profileUsername
   }
 }) {
   const { user: loggedInUser } = useContext(UserContext);
   const { user } = useUser(loggedInUser?.uId);
-  const [isFollowingProfile, setIsFollowingProfile] = useState(false);
+  const [isFollowingProfile, setIsFollowingProfile] = useState(null);
   const activeBtnFollow = user?.username && user?.username !== profileUsername;
 
   const handleToggleFollow = async () => {
@@ -42,7 +43,6 @@ export default function Header({
       isLoggedInUserFollowingProfile();
     }
   }, [user?.username, profileUserId]);
-
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-auto-screen-lg">
       <div className="container flex justify-center items-center">
@@ -50,7 +50,10 @@ export default function Header({
           <img
             className="rounded-full h-40 w-40 flex"
             alt={`${fullName} profile picture`}
-            src={`/images/avatars/${profileUsername}.jpg`}
+            src={`/images/avatars/${profileUsername}.jpg`} // it works
+            onError={(png) => {
+              png.target.src = DEFAULT_IMAGE_PATH;
+            }}
           />
         ) : (
           <Skeleton circle height={250} width={250} count={1} />
