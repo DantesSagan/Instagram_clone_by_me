@@ -46,8 +46,8 @@
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/app.css --watch",
     "react-scripts:start": "sleep 5 && react-scripts start",
     "react-scripts:dist": "react-scripts build",
-    "start": "run-p watch:css react-scripts:start",
-    "build": "run-s build:css react-scripts:dist",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint --fix --ext .js,.jsx ."
