@@ -46,29 +46,31 @@ export function seedDatabase(firebase) {
   }
 
   // eslint-disable-next-line prefer-const
-  for (let i = 1; i <= 5; ++i) {
-    firebase
-      .firestore()
-      .collection('photos')
-      .add({
-        photoId: i,
-        userId: '2',
-        imageSrc: `/images/users/aivazovsky/${i}.jpg`,
-        caption: 'Nice picture, unfortunately it not a sea D: ',
-        likes: [],
-        comments: [
-          {
-            displayName: 'dali',
-            comment: 'Love this place, looks like my animal farm!'
-          },
-          {
-            displayName: 'orwell',
-            comment: 'Would you mind if I used this picture?'
-          }
-        ],
-        userLatitude: '40.7128°',
-        userLongitude: '74.0060°',
-        dateCreated: Date.now()
-      });
+  for (let i = 1; i <= 500; ++i) {
+    for (let username = 1; username <= 500; ++username) {
+      firebase
+        .firestore()
+        .collection('photos')
+        .add({
+          photoId: i,
+          userId: '2',
+          imageSrc: `/images/users/${username}/${i}.jpg`,
+          caption: 'Nice picture, unfortunately it not a sea D: ',
+          likes: [],
+          comments: [
+            {
+              displayName: 'dali',
+              comment: 'Love this place, looks like my animal farm!'
+            },
+            {
+              displayName: 'orwell',
+              comment: 'Would you mind if I used this picture?'
+            }
+          ],
+          userLatitude: '40.7128°',
+          userLongitude: '74.0060°',
+          dateCreated: Date.now()
+        });
+    }
   }
 }

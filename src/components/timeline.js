@@ -13,12 +13,10 @@ export default function TimeLine() {
     <div className="container col-span-2">
       {!photos ? (
         <>
-          <Skeleton count={4} width={640} height={640} className="mb-10" />)
+          <Skeleton animation="wave" count={4} width={640} height={640} className="mb-10" />
         </>
-      ) : photos?.length > 0 ? (
-        photos.map((content) => <Post key={content.docId} content={content} />)
       ) : (
-        <p className="text-center text-2xl">Follow people to see photo!</p>
+        photos.map((content) => <Post key={content.docId} content={content} />)
       )}
     </div>
   );

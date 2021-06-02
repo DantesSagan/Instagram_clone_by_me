@@ -56,7 +56,7 @@ export default function Header({
             }}
           />
         ) : (
-          <Skeleton circle height={250} width={250} count={1} />
+          <Skeleton animation="wave" circle height={250} width={250} count={1} />
         )}
       </div>
       <div className="flex items-center justify-center flex-col col-span-2">
