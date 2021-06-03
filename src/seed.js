@@ -46,8 +46,8 @@ export function seedDatabase(firebase) {
   }
 
   // eslint-disable-next-line prefer-const
-  for (let i = 1; i <= 500; ++i) {
-    for (let username = 1; username <= 500; ++username) {
+  for (let i = 1; i <= 10; ++i) {
+    for (let username = 1; username <= 10; ++username) {
       firebase
         .firestore()
         .collection('photos')
