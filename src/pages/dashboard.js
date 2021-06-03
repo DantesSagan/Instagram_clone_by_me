@@ -4,7 +4,6 @@ import Header from '../components/header';
 import Sidebar from '../components/sidebar';
 import TimeLine from '../components/timeline';
 import useUser from '../hooks/use-user';
-import Loader from './loader';
 import LoggedInUserContext from '../context/logged-in-user';
 
 export default function Dashboard({ user: loggedInUser }) {
@@ -17,7 +16,6 @@ export default function Dashboard({ user: loggedInUser }) {
     <LoggedInUserContext.Provider value={{ user, setActiveUser }}>
       <div className="bg-gray-background">
         <Header />
-        <Loader />
         <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
           <TimeLine />
           <Sidebar />

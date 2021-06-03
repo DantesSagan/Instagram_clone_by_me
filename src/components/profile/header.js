@@ -44,7 +44,7 @@ export default function Header({
     }
   }, [user?.username, profileUserId]);
   return (
-    <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-auto-screen-lg">
+    <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
       <div className="container flex justify-center items-center">
         {profileUsername ? (
           <img
@@ -97,7 +97,7 @@ export default function Header({
                 {followerCount === 1 ? `follower` : `followers`}
               </p>
               <p className="mr-10">
-                <span className="font-bold">{followerCount}</span>
+                <span className="font-bold">{following?.length}</span>
                 {` `}
                 following
               </p>
