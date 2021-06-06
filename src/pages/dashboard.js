@@ -21,6 +21,9 @@ export default function Dashboard({ user: loggedInUser }) {
           <Sidebar />
         </div>
       </div>
+      <footer id="profile-footer">
+        <p>Coded by Alexsander @DantesSagan</p>
+      </footer>
     </LoggedInUserContext.Provider>
   );
 }
