@@ -22,18 +22,18 @@ export default function SuggestedProfile({
   return !followed ? (
     <div className="flex flex-row items-center align-items justify-between">
       <div className="flex items-center justify-betwen">
-        <img
-          className="rounded-full w-10 flex mr-3"
-          src={`/images/avatars/${username}.jpg`}
-          alt="avatars"
-        />
         <Link to={`/p/${username}`}>
+          <img
+            className="rounded-full w-10 flex mr-3"
+            src={`/images/avatars/${username}.jpg`}
+            alt="avatars"
+          />
           <p className="font-bold text-sm">{username}</p>
         </Link>
       </div>
 
       <button
-        className="text-xs font-bold text-blue-medium"
+        className="text-xs font-bold text-red-medium"
         type="button"
         onClick={handleFollowUser}
       >
