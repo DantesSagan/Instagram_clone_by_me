@@ -1,6 +1,6 @@
 ﻿# Instagram_clone_by_me
  
- ## My 1st huge project but not already done. 
+ ## My 1st huge project almost done. 
 
 ### This project uses: 
   1. React;
